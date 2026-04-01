@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CurrencyExchangeCustomer.MainPage"
+             x:Name="frmMainPage">
+    <Grid x:Name="grdMain" MaximumWidthRequest="420">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Some Bank of India" HorizontalOptions="Center" FontSize="16" FontAttributes="Bold"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Indian Currency Exchange Rates in Rupees" HorizontalOptions="Center"></Label>
+        <Grid Grid.Row="2" HorizontalOptions="Fill" Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--<Label Grid.Column="0" BindingContext="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=LiveStatus}">-->
+            <Label Grid.Column="0" BindingContext="{Binding Path=LiveStatus}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Live status: " FontSize="15"></Span>
+                        <Span Text="{Binding Path=ConnectionStatus}" TextColor="{Binding Path=StatusColor}" FontSize="15"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label x:Name="lblStatus"  Grid.Column="0" Grid.Row="1" Text="{Binding Path=Status, StringFormat='Source: {0:s}'}" VerticalOptions="Center"></Label>
+            <Button x:Name="bttnGetData" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"  Text="Refresh" Command="{Binding Path=GetDataCommand}" Style="{StaticResource ButtonStyle}"></Button>
+        </Grid>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="5,10,5,0" Stroke="LightGray" StrokeThickness="1" BackgroundColor="PaleTurquoise" StrokeShape="RoundRectangle 5,5,5,5" BindingContext="{Binding Source={x:Reference frmMainPage}, Path=BindingContext.BoardModel}" IsVisible="{Binding Path=IsBoardVisible}">
+            <Grid HorizontalOptions="Fill" Margin="3,3,3,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="{Binding Path=BoardMessage}" Margin="5,0,5,0" VerticalOptions="Center" TextColor="DarkSlateGray"></Label>
+                <Button Grid.Column="1" Text="X" MinimumWidthRequest="20" MinimumHeightRequest="20" HeightRequest="20" WidthRequest="20" Padding="2" BackgroundColor="Teal" Command="{Binding Path=CloseNoticeCommand}"></Button>
+            </Grid>
+        </Border>
+        <CollectionView x:Name="clvCurrencies" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Currencies}" HorizontalOptions="Fill" VerticalOptions="Start" MaximumWidthRequest="400" Margin="0,10,0,0" MaximumHeightRequest="650" SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="3"></LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="CadetBlue" StrokeThickness="1" Margin="4,0,4,0" StrokeShape="RoundRectangle 6,6,6,6">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference frmMainPage},Path=BindingContext.CurrencyTappedCommand}" CommandParameter="{Binding Path=CurrencyRef}"></TapGestureRecognizer>
+                        </Border.GestureRecognizers>
+                        <Grid Margin="5,2,5,2" BackgroundColor="Snow">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Stroke="BurlyWood" StrokeThickness="1"  StrokeShape="RoundRectangle 12,12,12,12"  HorizontalOptions="Start" MinimumWidthRequest="80" Margin="0,4,0,4">
+                                <Label Text="{Binding Path=Country}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="12" TextColor="BlueViolet"></Label>
+                            </Border>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrencyName}" Margin="4,2,0,0"></Label>
+                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding Path=Rate, StringFormat='&#x20b9; {0:F6}'}" VerticalOptions="Center"></Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

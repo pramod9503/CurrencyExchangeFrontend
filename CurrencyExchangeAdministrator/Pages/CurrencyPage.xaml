@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CurrencyExchangeAdministrator.Pages.CurrencyPage"
+             x:Name="frmCurrencyPage">
+    <ContentPage.Resources>
+        <Style x:Key="HeadLabelStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="End"></Setter>
+            <Setter Property="Margin" Value="0,5,0,0"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="TextColor" Value="Maroon"></Setter>
+        </Style>
+        <Style x:Key="TextLabelStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"></Setter>
+            <Setter Property="Margin" Value="0,5,0,0"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Some Bank of India" HorizontalOptions="Center" FontSize="16" FontAttributes="Bold"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Indian Currency Exchange Rate in Rupees" HorizontalOptions="Center"></Label>
+        <HorizontalStackLayout Grid.Row="2" HorizontalOptions="Center" Margin="0,10,0,0">
+            <Button Grid.Row="0" Grid.Column="0" Text="Back" Command="{Binding Path=BackCommand}" Margin="0,0,0,0" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Text="Refresh" Command="{Binding Path=RefreshCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"></Button>
+
+            <Button Grid.Row="1" Grid.Column="0" Text="Edit Currency" Command="{Binding Path=NavEditCurrencyCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Text="Edit Rate" Command="{Binding Path=NavEditRateCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}"></Button>
+        </HorizontalStackLayout>
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="5,10,5,0" Stroke="LightGray" StrokeThickness="1" MaximumWidthRequest="500" BackgroundColor="PaleTurquoise" StrokeShape="RoundRectangle 5,5,5,5" BindingContext="{Binding Source={x:Reference frmCurrencyPage}, Path=BindingContext.BoardModel}" IsVisible="{Binding Path=IsBoardVisible}">
+            <Grid HorizontalOptions="Fill" Margin="3,3,3,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="{Binding Path=BoardMessage}" Margin="5,0,5,0" VerticalOptions="Center" TextColor="DarkSlateGray"></Label>
+                <Button Grid.Column="1" Text="X" MinimumWidthRequest="20" MinimumHeightRequest="20" HeightRequest="20" WidthRequest="20" Padding="2" BackgroundColor="Teal" Command="{Binding Path=CloseNoticeCommand}"></Button>
+            </Grid>
+        </Border>
+        <Border Grid.Row="4" Stroke="DarkSlateGrey" Padding="20" StrokeShape="RoundRectangle 6,6,6,6" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White">
+            <Border.Shadow>
+                <Shadow Brush="LightGray" Offset="4,4"></Shadow>
+            </Border.Shadow>
+            <Grid  BindingContext="{Binding Path=Currency}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Currency: " Style="{StaticResource HeadLabelStyle}" Margin="0,0,0,0"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrencyName, StringFormat=' {0:s}'}" Style="{StaticResource TextLabelStyle}" Margin="0,0,0,0"></Label>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Country: " HorizontalOptions="End" Style="{StaticResource HeadLabelStyle}"></Label>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=Country, StringFormat=' {0:s}'}" Style="{StaticResource TextLabelStyle}"></Label>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Rate: " HorizontalOptions="End" Style="{StaticResource HeadLabelStyle}"></Label>
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=Rate, StringFormat=' &#x20b9; {0:F6}'}" Style="{StaticResource TextLabelStyle}"></Label>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Source: " HorizontalOptions="End" Style="{StaticResource HeadLabelStyle}"></Label>
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Path=Source, StringFormat=' {0:s}'}" Style="{StaticResource TextLabelStyle}"></Label>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

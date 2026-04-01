@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CurrencyExchangeAdministrator.Pages.EditRatePage"
+             x:Name="frmEditRatePage">
+    <ContentPage.Resources>
+        <Style x:Key="HeadLabelStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="End"></Setter>
+            <Setter Property="Margin" Value="0,5,0,0"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="TextColor" Value="Maroon"></Setter>
+        </Style>
+        <Style x:Key="TextLabelStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"></Setter>
+            <Setter Property="Margin" Value="0,5,0,0"></Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Some Bank of India" HorizontalOptions="Center" FontSize="16" FontAttributes="Bold"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Indian Currency Exchange Rate in Rupees" HorizontalOptions="Center"></Label>
+        <Border Grid.Row="3" Stroke="DarkSlateGrey" Padding="20" StrokeShape="RoundRectangle 6,6,6,6" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="White">
+            <Border.Shadow>
+                <Shadow Brush="LightGray" Offset="4,4"></Shadow>
+            </Border.Shadow>
+            <Grid  BindingContext="{Binding Path=RateModel}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Currency: " Style="{StaticResource HeadLabelStyle}" Margin="0,0,0,0"></Label>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=CurrencyName, StringFormat=' {0:s}'}" Style="{StaticResource TextLabelStyle}" Margin="0,0,0,0"></Label>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Country: " HorizontalOptions="End" Style="{StaticResource HeadLabelStyle}"></Label>
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=Country, StringFormat=' {0:s}'}" Style="{StaticResource TextLabelStyle}"></Label>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Current Rate: " HorizontalOptions="End" VerticalOptions="Center" Style="{StaticResource HeadLabelStyle}"></Label>
+                <Label Grid.Row="2" Grid.Column="1" Text="&#x20b9;" VerticalOptions="Center" Margin="5,3,0,0"></Label>
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Path=Rate, Mode=TwoWay}" Margin="15,5,0,0" HorizontalOptions="Start" BackgroundColor="LightYellow" Keyboard="Numeric"></Entry>
+                
+                <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="0,25,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Text="Submit" Command="{Binding Source={x:Reference frmEditRatePage}, Path=BindingContext.SubmitCommand}" Margin="0,0,10,0" Style="{StaticResource ButtonStyle}" HorizontalOptions="End"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Text="Cancel" Command="{Binding Source={x:Reference frmEditRatePage}, Path=BindingContext.BackCommand}" Margin="10,0,0,0" Style="{StaticResource ButtonStyle}" HorizontalOptions="Start"></Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
