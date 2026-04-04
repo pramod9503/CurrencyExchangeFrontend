@@ -52,7 +52,7 @@ This project implements:
 * Distributed cache handling with invalidation
 * Real-time updates using SignalR
 * Event-driven architecture using RabbitMQ
-* Clean separation of Admin & Customer services 
+* Clean separation of Administration & Customer services 
 * EF Core-based data access layer
 * Docker support for RabbitMQ
 
@@ -83,7 +83,7 @@ This project implements:
 
 4.	Import Queue Configuration
     *	Open RabbitMQ UI
-    *	Import RabbitMq-Configuration.json file found in the __“~CurrencyExchangeLive\Backend\CurrencyAdministrator”__ folder.
+    *	Import __RabbitMq-Configuration.json__ file found in the __“~CurrencyExchangeLive\Backend\CurrencyAdministrator”__ folder.
         - This creates:
             + Exchange: currency_update_exchange
             + Queue: currency_exchange.queue
@@ -97,17 +97,17 @@ This project implements:
 
 6.	Run Backend
     *   Runs:
-        -   Admin API
+        -   Administration API
         -   Customer API
         -   Opens Swagger for both services
 
 7.	Run Frontend (.NET MAUI)
-    *   Run:
+    *   Runs:
         -   Administration App
         -   Customer App
 
 ## Real-Time Behavior
-*	Admin updates currency
+*	Administrator updates currency
 
 *	Cache invalidated instantly
 
