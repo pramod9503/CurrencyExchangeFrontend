@@ -52,7 +52,7 @@ This project implements:
 * Distributed cache handling with invalidation
 * Real-time updates using SignalR
 * Event-driven architecture using RabbitMQ
-* Clean separation of Admin & Customer services 
+* Clean separation of Administration & Customer services 
 * EF Core-based data access layer
 * Docker support for RabbitMQ
 
@@ -69,13 +69,13 @@ This project implements:
 
     *   Type the following command to run the __rabbitmq:3-management__ container with name __rabbitmq-currency__.
 
-            `docker run -d \
+            docker run -d \
             --hostname rabbitmq-host \
             --name rabbitmq-currency \
             -p 5672:5672 \
             -p 15672:15672 \
             -v rabbitmq_data:/var/lib/rabbitmq \
-            rabbitmq:3-management`
+            rabbitmq:3-management
 
 3.	Access UI: 
             http://localhost:15672/
@@ -83,13 +83,13 @@ This project implements:
 
 4.	Import Queue Configuration
     *	Open RabbitMQ UI
-    *	Import RabbitMq-Configuration.json file found in the __~CurrencyExchangeLive\Backend\CurrencyAdministrator__ folder.
+    *	Import __RabbitMq-Configuration.json__ file found in the __“~CurrencyExchangeLive\Backend\CurrencyAdministrator”__ folder.
         - This creates:
             + Exchange: currency_update_exchange
             + Queue: currency_exchange.queue
 
 5.	Setup Database
-    *   Run the following command in Powershell from the __~CurrencyExchangeLive\Backend\CurrencyAdministrator__ folder.
+    *   Run the following command in Powershell from the __‘~CurrencyExchangeLive\Backend\CurrencyAdministrator’__ folder –
 
         `dotnet ef database update`
 
@@ -109,7 +109,7 @@ This project implements:
         -   Customer App
 
 ## Real-Time Behavior
-*	Admin updates currency
+*	Administrator updates currency
 
 *	Cache invalidated instantly
 
@@ -126,11 +126,7 @@ This project implements:
 *	Microservices Communication
 
 ## Screenshots
-- Swagger screenshot backend.
-
-![Swagger UI](CurrencyExchangeAdministrator/Resources/Images/Screenshots/swagger.png)
-
-- Opening screenshot frontend .NET MAUI.
+- Opening screenshot.
 
 ![Front UI](CurrencyExchangeAdministrator/Resources/Images/Screenshots/customer_administrator.png)
 
