@@ -83,13 +83,13 @@ This project implements:
 
 4.	Import Queue Configuration
     *	Open RabbitMQ UI
-    *	Import RabbitMq-Configuration.json file found in the __“~CurrencyExchangeLive\Backend\CurrencyAdministrator”__ folder.
+    *	Import RabbitMq-Configuration.json file found in the __ï¿½~CurrencyExchangeLive\Backend\CurrencyAdministratorï¿½__ folder.
         - This creates:
             + Exchange: currency_update_exchange
             + Queue: currency_exchange.queue
 
 5.	Setup Database
-    *   Run the following command in Powershell from the __‘~CurrencyExchangeLive\Backend\CurrencyAdministrator’__ folder –
+    *   Run the following command in Powershell from the __ï¿½~CurrencyExchangeLive\Backend\CurrencyAdministratorï¿½__ folder ï¿½
 
         `dotnet ef database update`
 
@@ -124,7 +124,11 @@ This project implements:
 *	Microservices Communication
 
 ## Screenshots
-- Opening screenshot.
+- Swagger screenshot backend.
+
+![Front UI](Resources/Images/Screenshots/swagger.png)
+
+- Opening screenshot frontend .NET MAUI.
 
 ![Front UI](Resources/Images/Screenshots/customer_administrator.png)
 
